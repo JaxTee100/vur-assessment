@@ -27,7 +27,7 @@ export default {
 
     const fetchData = async () =>{
       try {
-        console.log("started here")
+        
         const response = await axios.get("https://pokeapi.co/api/v2/pokemon/"+props.id);
         console.log("response", response.data.abilities[0].ability.name)
         pokemons.value = response.data.results
@@ -62,7 +62,9 @@ export default {
 
 <style>
 .display-card {
+  text-align: center;
   box-shadow: 1px 1px 1px grey;
+  padding: 10px;
 }
 .display-card h1{
   color: #fcfafa;

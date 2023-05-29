@@ -37,15 +37,12 @@
     <div class="submit">
       <button>Create an account</button>
     </div>
+    <p>already have an account? <router-link :to="{name: 'login'}">Login</router-link></p>
 
    
 
   </form>
 
-  <p> Email: {{email}} </p>
-  <p> Password: {{password}} </p>
-  <p> Role: {{role}} </p>
-  <p>Terms accepted: {{terms}}</p>
 </template>
 
 <script>

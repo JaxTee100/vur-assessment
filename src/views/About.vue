@@ -1,6 +1,10 @@
 <template>
-<div class="about"></div>
+<div class="about">
   <h1>About</h1>
+  <p>Check out our  <router-link class="link" :to="{name: 'displayCards'}">Pokemon cards</router-link></p>
+
+</div>
+  
 </template>
 
 <script>
@@ -11,8 +15,11 @@ export default {
 
 <style>
 .about{
-    background-color: #e6f0e4;
+    text-align: center;
+    text-decoration: none;
 }
-
+.link{
+  text-decoration: none;
+}
 
 </style>

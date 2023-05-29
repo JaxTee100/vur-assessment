@@ -1,56 +1,69 @@
 <template>
   <h1>Display Cards</h1>
-  
-  <div v-for="pokemon in pokemons" :key="pokemon.name">
-    <h1>{{pokemon.name}}</h1>
-    <p>{{ pokemons.indexOf(pokemon) + 1}}</p>
-    <router-link :to="{name: 'displayCard', params: {id: pokemons.indexOf(pokemon) + 1}}">
-      click
+  <div class="pokemon-container">
+  <div class="pokemon-cards" v-for='pokemon in pokemonData' :key='pokemon.name' >
+    <router-link class="link" :to="{name: 'displayCard', params: {id: pokemonData.indexOf(pokemon) + 1}}">
+      <div >
+        <h3>{{pokemon.name.toUpperCase()}}</h3>
+        <img  :src="pokemon.spriteUrl"  alt="pokemon" />
+      </div>
     </router-link>
+    
   </div>
+  </div>
+  
+  
   
 </template>
 
 <script>
-import {ref, onMounted} from 'vue'
-import axios from 'axios'
+import fetchData from '../composables/fetchData'
+import {usePokemonImages} from '../composables/usePokemonImages'
 export default {
   
   setup(){
-    const pokemons = ref([]);
-    const id = ref(null)
 
-    const fetchData = async () =>{
-      try {
-        console.log("started here")
-        const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
-        pokemons.value = response.data.results
+    const {pokemons, id, load, imgArr} = fetchData();
+    const {pokemonData, fetchPokemonData} = usePokemonImages()
 
-        let arr = pokemons.value
-        for(let i=0; i<arr.length; i++){
-          console.log(arr[i].url)
-          id.value = arr.indexOf(arr[i]) + 1
-          console.log(id.value)
-        }
+    fetchPokemonData();
+    load()
 
-        
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    console.log("pokemondata",pokemonData.value)
+    
 
-    onMounted(fetchData);
-
-
-    return {
-      pokemons,
-      id
-    }
+  
+    return { pokemons, id, imgArr, pokemonData}
   }
     
 }
 </script>
 
-<style>
+<style scoped>
+h1{
+  text-align: center;
+  color: #2c3442;
+}
+  .pokemon-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 5px;
+
+  }
+  .pokemon-cards{
+    border: 1px solid #edeff2;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 1px #a3a19d, -1px -2px 4px #b9bec7;
+    
+  }
+
+  .link{
+    text-decoration: none;
+    color: #616b7a;
+  }
+
+  
 
 </style>
