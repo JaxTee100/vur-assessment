@@ -2,7 +2,7 @@
     <h1>Register</h1>
   <form @submit.prevent='handleSubmit'>
     <label>FirstName: </label>
-    <input type="text" required v-model='email'>
+    <input type="text" required v-model='firstName'>
 
 
     <label>Email: </label>
@@ -13,7 +13,7 @@
     <div v-if='passwordError' class="error">{{ passwordError}}</div>
 
     <label>Confirm Password: </label>
-    <input type="password" required v-model='password'>
+    <input type="password" required v-model='confirmPassword'>
     <div v-if='passwordError' class="error">{{ passwordError}}</div>
 
 
@@ -23,7 +23,7 @@
       <option value="designer">Web Designer</option>
     </select>
 
-    <label>Skills:</label>
+    <label>Skills:(alt + ,)</label>
     <input type="text" v-model="tempSkill" @keyup.alt="addSkill">
     <div v-for="skill in skills" :key='skill' class="pill">
       <span @click='deleteSkill(skill)'>{{skill}}</span>
@@ -42,6 +42,10 @@
    
 
   </form>
+  <h2>{{firstName}}</h2>
+  <h2>{{role}}</h2>
+  <h2>{{skills}}</h2>
+  <h2>{{terms}}</h2>
 
 </template>
 
@@ -52,7 +56,7 @@ data(){
     firstName: '',
     email: '',
     password: '',
-    cnfirmPassword: '',
+    confirmPassword: '',
     role: '',
     terms: false,
     tempSkill: '',

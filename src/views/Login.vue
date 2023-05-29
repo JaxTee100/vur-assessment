@@ -22,6 +22,7 @@
    
 
   </form>
+  {{ email}}
 </template>
 
 <script>
